@@ -1,0 +1,3694 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- lenis (Smooth Scroll) -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <!-- ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+  <!-- swiper js -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- font-awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <!-- marquee -->
+  <script src="https://cdn.jsdelivr.net/npm/marquee.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.Marquee/1.6.0/jquery.marquee.min.js"></script>
+  <!-- AOS 라이브러리 불러오기-->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <title>신한은행 PG</title>
+  <style>
+    /*-------------------- 폰트 --------------------*/
+    /*-------------------- Pretendard --------------------*/
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 400;
+      font-style: normal;
+      font-display: block;
+      src: url('./font/Pretendard-Regular.woff2') format('woff2'),
+        url('./font/Pretendard-Regular.woff') format('woff')
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 500;
+      font-style: normal;
+      font-display: block;
+      src: url('./font/Pretendard-Medium.woff2') format('woff2'),
+        url('./font/Pretendard-Medium.woff') format('woff')
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 600;
+      font-style: normal;
+      font-display: block;
+      src: url('./font/Pretendard-SemiBold.woff2') format('woff2'),
+        url('./font/Pretendard-SemiBold.woff') format('woff')
+    }
+
+    @font-face {
+      font-family: 'Pretendard';
+      font-weight: 700;
+      font-style: normal;
+      font-display: block;
+      src: url('./font/Pretendard-Bold.woff2') format('woff2'),
+        url('./font/Pretendard-Bold.woff') format('woff')
+    }
+
+    /*-------------------- 원신한 --------------------*/
+    @font-face {
+      font-family: OneShinhan;
+      font-style: normal;
+      font-weight: 300;
+      src: local("※"), url(./font/OneShinhanLight.ttf) format("ttf"), url(./font/OneShinhanLight.otf) format("opentype"), url(../font/OneShinhanLight.eot) format("embedded-opentype")
+    }
+
+    @font-face {
+      font-family: OneShinhan;
+      font-style: normal;
+      font-weight: 500;
+      src: local("※"), url(./font/OneShinhanMedium.ttf) format("ttf"), url(./font/OneShinhanMedium.otf) format("opentype"), url(../font/OneShinhanMedium.eot) format("embedded-opentype")
+    }
+
+    @font-face {
+      font-family: OneShinhan;
+      font-style: normal;
+      font-weight: 700;
+      src: local("※"), url(./font/OneShinhanBold.ttf) format("ttf"), url(./font/OneShinhanBold.otf) format("opentype"), url(../font/OneShinhanBold.eot) format("embedded-opentype")
+    }
+
+    /* 노멀라이즈 */
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      word-break: keep-all;
+    }
+
+    body {
+      font-family: 'Pretendard';
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    em {
+      font-style: normal;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      border: none;
+      vertical-align: top;
+    }
+
+    .txt_bold {
+      font-weight: 700;
+    }
+
+    button {
+      overflow: visible;
+      border: 0;
+      background: none;
+      color: inherit;
+      font: inherit;
+      line-height: inherit;
+      cursor: pointer;
+    }
+
+    /*-------------------- 커스텀 --------------------*/
+    /*-------------------- header (모바일 메인) --------------------*/
+    .header {
+      background: #fff;
+      transition: all 0.5s;
+    }
+
+    .header .inner {
+      height: 64px;
+      padding: 0 20px;
+      transition: all 0.5s;
+    }
+
+    .header .h_wrap {
+      position: relative;
+      height: 100%;
+    }
+
+    .header .h_top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 64px;
+      padding: 0 20px;
+      background: #fff;
+      border-bottom: 1px solid #f9fafb;
+      transform: translateY(0);
+      transition: transform 0.5s;
+    }
+
+    .wrap.down .h_top {
+      transform: translateY(-100%);
+      transition: transform 0.5s;
+    }
+
+    .header_dev .logo {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      width: 183px;
+      height: 80px;
+      z-index: 110;
+      transition: all .5s;
+    }
+
+    .header_dev .logo a {
+      display: block;
+    }
+
+    .header_dev .logo .ico {
+      display: block;
+      width: 183px;
+      height: 64px;
+      background: url(https://pg.shinhan.com/srs/htdocs/images/common/gnb_logo_w.svg) no-repeat 0 0 / 100% 100%;
+    }
+
+    .sr_only {
+      position: absolute;
+      top: -9999px;
+      font-size: 0;
+      height: 0;
+    }
+
+    .header_dev .btn_dropdown {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      margin-top: -16px;
+      background: url(./Shinhan_logo/gnb_menu_w.svg) no-repeat 50% 50% / 32px;
+      text-indent: -9999px;
+    }
+
+    .header.on .logo {
+      position: fixed;
+      z-index: 200;
+    }
+
+    .header.on .btn_dropdown {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      z-index: 200;
+      margin-top: 0;
+    }
+
+    .header .btn_dropdown.active {
+      background: url(./Shinhan_logo/ico_close_x32.svg) no-repeat 0 0 / 32px;
+    }
+
+    .header .nav .navbar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+      position: fixed;
+      top: 65px;
+      right: -100%;
+      z-index: 100;
+      width: 100%;
+      height: calc(100% - 64px);
+      padding: 16px 20px 40px;
+      background: #fff;
+      transition: right 0.3s;
+      box-sizing: border-box;
+    }
+
+    .header .nav .navbar.active {
+      right: 0;
+    }
+
+    .header .navbar>li>a {
+      display: block;
+      position: relative;
+      padding: 12px 52px 12px 0;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 24px;
+    }
+
+    .header .navbar>li.has_sub>a::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 32px;
+      height: 32px;
+      margin-top: -16px;
+      background: url(./Shinhan_logo/ico_arw_up.svg) no-repeat 0 0 / 32px;
+      transform: rotate(180deg);
+    }
+
+    .header .navbar>li.has_sub.active>a::after {
+      transform: rotate(0);
+    }
+
+    .header .navbar>li>a.ico_arw::after {
+      content: "";
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-left: 2px;
+      background: url(../images/common/ico_new_window.svg) no-repeat 0 0 / 16px;
+      vertical-align: top;
+    }
+
+    .header .navbar>li .sub_menu {
+      display: none;
+    }
+
+    .header .navbar>li .sub_menu li a {
+      display: block;
+      padding: 8px 20px;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.08px;
+    }
+
+    .header.col_white {
+      background: transparent;
+    }
+
+    .header.col_white .logo .ico {
+      background: url(./Shinhan_logo/gnb_logo_b.svg) no-repeat 0 0 / 100% 100%;
+    }
+
+    .header.col_white .h_top {
+      background: transparent;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header.col_white .btn_dropdown {
+      background: url(./Shinhan_logo/gnb_menu_w.svg) no-repeat 50% 50% / 32px;
+    }
+
+    .header.col_white.on {
+      background: #fff;
+    }
+
+    .header.col_white.on .logo .ico {
+      background: url(./Shinhan_logo/gnb_logo_b.svg) no-repeat 0 0 / 100% 100%;
+    }
+
+    .header.col_white.on .h_top {
+      background: #fff;
+      border-bottom: 1px solid #f9fafb;
+    }
+
+    .header.col_white.on .btn_dropdown {
+      background: url(./Shinhan_logo/gnb_menu_w.svg) no-repeat 0 0 / 32px;
+    }
+
+    /*-------------------- header 끝 (모바일 메인) --------------------*/
+
+    /*-------------------- header (모바일 사이드) --------------------*/
+    .main_wrap .header_dev {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+    }
+
+    .header_dev .inner {
+      height: 56px;
+      padding: 0 20px;
+      transition: all 0.5s;
+    }
+
+    .header_dev .h_wrap {
+      position: relative;
+      height: 100%;
+    }
+
+    .header_dev .h_top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 56px;
+      padding: 0 20px;
+      background: #fff;
+      transform: translateY(0);
+      transition: transform 0.5s;
+    }
+
+    .header_dev.col_white .h_top {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .header_dev.col_white.active .h_top {
+      background: #fff;
+    }
+
+    .wrap.down .h_top {
+      transform: translateY(-100%);
+      transition: transform 0.5s;
+    }
+
+    .header_dev .logo {
+      display: flex;
+      align-items: center;
+      width: 230px;
+      height: 56px;
+      transition: all 0.5s;
+    }
+
+    .header_dev .logo a {
+      display: block;
+    }
+
+    .header_dev .logo .ico {
+      display: block;
+      width: 115px;
+      height: 20px;
+      background: url(https://pg.shinhan.com/srs/htdocs/images/common/gnb_logo_w.svg) no-repeat 0 0 / 100% 100%;
+    }
+
+    .header_dev.col_white.active .logo .ico {
+      background: url(./Shinhan_logo/gnb_logo_b.svg) no-repeat 0 0 / 100% 100%;
+    }
+
+    .header_dev .btn_dropdown {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      margin-top: -16px;
+      background: url(./Shinhan_logo/gnb_menu_w.svg) no-repeat 50% 50% / 32px;
+      text-indent: -9999px;
+    }
+
+    .header_dev.on .logo {
+      position: fixed;
+      z-index: 200;
+    }
+
+    .header_dev.on .btn_dropdown {
+      position: fixed;
+      top: 16px;
+      right: 0;
+      z-index: 200;
+      margin-top: 0;
+    }
+
+    .header_dev .nav_dev .navbar_dev {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+      position: fixed;
+      top: 56px;
+      right: -100%;
+      z-index: 100;
+      width: 100%;
+      height: calc(100% - 56px);
+      padding: 16px 20px 40px;
+      background: #fff;
+      transition: right 0.3s;
+      box-sizing: border-box;
+    }
+
+    .header_dev.col_white .btn_dropdown {
+      background: url(./Shinhan_logo/gnb_menu_w.svg) no-repeat 50% 50% / 32px;
+    }
+
+    .header_dev.active .btn_dropdown {
+      background: url(./Shinhan_logo/ico_close_x32.svg) no-repeat 0 0 / 32px;
+    }
+
+    .header_dev.active .nav_dev .navbar_dev {
+      right: 0;
+    }
+
+    .wrap.down .header_dev.active .nav_dev .navbar_dev {
+      right: -100%;
+    }
+
+    .header_dev .navbar_dev>li>a {
+      display: block;
+      position: relative;
+      padding: 12px 52px 12px 0;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 24px;
+      /* letter-spacing: -2.4px; */
+    }
+
+    .header_dev .navbar_dev>li>a:hover {
+      color: #202225;
+    }
+
+    .header_dev .navbar_dev>li.has_sub>a::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 32px;
+      height: 32px;
+      margin-top: -16px;
+      background: url(./Shinhan_logo/ico_arw_up.svg) no-repeat 0 0 / 32px;
+      transform: rotate(180deg);
+    }
+
+    .header_dev .navbar_dev>li.has_sub>a.active::after {
+      transform: rotate(0);
+    }
+
+    .header_dev .navbar_dev>li>a.ico_arw::after {
+      content: "";
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-left: 2px;
+      background: url(https://pg.shinhan.com/srs/htdocs/images/common/ico_new_window.svg) no-repeat 0 0 / 16px;
+      vertical-align: top;
+    }
+
+    .header_dev .navbar_dev>li .sub_menu {
+      overflow: hidden;
+      height: 0;
+      transition: height 0.4s;
+    }
+
+    .header_dev .navbar_dev>li.has_sub>a.active+.sub_menu {
+      height: auto;
+    }
+
+    .header_dev .navbar_dev>li .sub_menu li a {
+      display: block;
+      padding: 8px 20px;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.08px;
+    }
+
+    .header_dev .navbar_dev>li .sub_menu li a:hover {
+      color: #202225;
+    }
+
+    /*-------------------- header (모바일 사이드) 끝 --------------------*/
+
+    /*-------------------- 슬라이더 시작 --------------------*/
+    .visual-sec {
+      position: relative;
+      overflow: hidden;
+      height: 100vh;
+      background-color: #000;
+      min-height: 800px;
+    }
+
+    .visual-sec .swiper {
+      height: 100%;
+    }
+
+    /* .visual-sec .swiper-wrapper {
+      position: relative;
+    } */
+
+    .visual-sec .txt-box {
+      position: absolute;
+      max-width: 1440px;
+      top: 30%;
+      left: 80px;
+      right: 80px;
+      margin: 0 auto;
+      z-index: 10;
+    }
+
+    .visual-sec .txt-box .tit {
+      font-family: OneShinhan;
+      font-size: 64px;
+      line-height: 80px;
+      letter-spacing: -1px;
+      /* letter-spacing: -0.32px; */
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .visual-sec .txt-box .tit em {
+      color: #5ee1ff;
+    }
+
+    .visual-sec .txt-box .desc {
+      margin-top: 40px;
+    }
+
+    .visual-sec .txt-box .desc p {
+      font-size: 24px;
+      line-height: 32px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .visual-sec .bg {
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      transform: scale(1.5);
+      background-color: transparent;
+      background-position: center;
+      transition: 4s 0.1s linear;
+    }
+
+    .visual-sec .swiper-slide-active .bg {
+      transform: scale(1);
+    }
+
+    .visual-sec .bg2 {
+      background-position: center right 40%;
+    }
+
+    .visual-sec .bg3 {
+      background-position: center right 30%;
+    }
+
+    .visual-sec .all-box {
+      position: absolute;
+      /*   display: inline-flex; */
+      display: flex;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      height: auto;
+      left: 80px;
+      right: 80px;
+      bottom: 30%;
+      z-index: 20;
+    }
+
+    .visual-sec .pager_container {
+      display: flex;
+    }
+
+    .visual-sec .progress-box {
+      position: relative;
+      width: 200px;
+      height: auto;
+      z-index: 11;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .autoplay-progress {
+      position: absolute;
+      left: 0;
+      top: 10px;
+      z-index: 10;
+      width: 60px;
+      height: 2px;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .progress-box .progress_2 {
+      left: 50%;
+      transform: translatex(-50%);
+    }
+
+    .progress-box .progress_3 {
+      left: 100%;
+      transform: translatex(-100%);
+    }
+
+    .autoplay-progress svg {
+      --progress: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 10;
+      width: 100%;
+      /*	height: 100%;*/
+      stroke-width: 6px;
+      stroke: #fff;
+      fill: none;
+      stroke-dashoffset: calc(100 * (1 - var(--progress)));
+      stroke-dasharray: 100;
+    }
+
+    /*--------------- 슬라이더 pagination ---------------*/
+    .swiper-pagination {
+      position: static;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .swiper-pagination-bullet {
+      width: 60px;
+      height: 2px;
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.2);
+      /* transition: background 200ms; */
+
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(255, 255, 255, 0.2);
+        /* transition: opacity 200ms; */
+      }
+    }
+
+    .swiper-pagination-bullet-active {
+      background: rgba(255, 255, 255, 0.2);
+
+      &::before {
+        background-color: #fff;
+        animation: slide-progress 5s cubic-bezier(.5, 0, .3, 1) forwards;
+      }
+    }
+
+    @keyframes slide-progress {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .visual-sec .swiper-button-next,
+    .visual-sec .swiper-button-prev {
+      position: static;
+      width: 21px;
+      height: 21px;
+      top: 0;
+      margin-top: 0;
+    }
+
+    .visual-sec .swiper-button-prev {
+      background: url(https://pg.shinhan.com/srs/htdocs/images/main/btn_swiper_prev.svg);
+    }
+
+    .visual-sec .swiper-button-next {
+      background: url(https://pg.shinhan.com/srs/htdocs/images/main/btn_swiper_next.svg);
+    }
+
+    .visual-sec .swiper-button-next::after,
+    .visual-sec .swiper-button-prev::after {
+      font-size: 0;
+    }
+
+    .visual-sec .swiper-button-pause,
+    .visual-sec .swiper-button-play {
+      position: relative;
+      display: block;
+      z-index: 100;
+      width: 24px;
+      height: 24px;
+      color: transparent;
+    }
+
+    .visual-sec .swiper-button-pause {
+      background: url(https://pg.shinhan.com/srs/htdocs/images/main/btn_swiper_pause.svg) no-repeat 0 0 / 24px;
+    }
+
+    .visual-sec .swiper-button-play {
+      background: url(https://pg.shinhan.com/srs/htdocs/images/main/btn_swiper_play.svg) no-repeat 0 0 / 24px;
+      display: none;
+    }
+
+    /*--------------- 스크롤 다운 애니메이션 시작 ---------------*/
+    .visual-sec .scroll_down {
+      position: absolute;
+      z-index: 100;
+      bottom: 80px;
+      right: 80px;
+    }
+
+    .visual-sec .scroll_down .scroll_txt {
+      display: inline-block;
+      color: #fff;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: -0.06px;
+      font-weight: bold;
+      margin: 6px 14px 0 0;
+      vertical-align: top;
+    }
+
+    .visual-sec .scroll_down .scroll_mouse {
+      position: relative;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      width: 6px;
+      height: 24px;
+      border-radius: 20px;
+    }
+
+    .visual-sec .scroll_down .scroll_wheel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      animation: scrollWheel 2.5s infinite;
+    }
+
+    @keyframes scrollWheel {
+      0% {
+        top: 0;
+        opcaity: 0;
+      }
+
+      15% {
+        top: 0;
+        opacity: 1;
+      }
+
+      30% {
+        top: 0;
+        opacity: 1;
+      }
+
+      45% {
+        top: 18px;
+        opcaity: 1;
+      }
+
+      100% {
+        top: 18px;
+        opacity: 0;
+      }
+    }
+
+    /*--------------- 스크롤 다운 애니메이션 끝 ---------------*/
+    /*-------------------- slider 끝 --------------------*/
+
+    /*--------------- 신한PG소개 시작 ---------------*/
+    .main_service {
+      position: relative;
+      background: url(https://pg.shinhan.com/srs/htdocs/images/main/bg_main_card.jpg) no-repeat 50% 50% / cover;
+    }
+
+    .main_service .service_bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .main_service .service_bg li {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: no-repeat 50% 50% / cover;
+      background-attachment: fixed;
+      transition: .2s linear;
+      opacity: 0;
+    }
+
+    .main_service .inner {
+      position: relative;
+      z-index: 1;
+      padding: 64px 20px;
+    }
+
+    .main_service .tit_box {
+      color: #fff;
+    }
+
+    .main_service .tit_box .tit_depth4 {
+      font-family: 'OneShinhan';
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    .main_service .tit_box .tit_depth1 {
+      margin-top: 8px;
+      color: #fff;
+      font-family: 'OneShinhan';
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    .main_service .tit_box .desc {
+      margin-top: 16px;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+    }
+
+    .main_service .list_box .img_box::before {
+      content: none;
+    }
+
+    .main_service .list_box .list_category .inner {
+      background: #fff;
+    }
+
+    .main_service .service_cont .list_box .list_category .inner {
+      padding: 24px;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+    }
+
+    .main_service .list_box {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .main_service .list_box .list_category {
+      display: block;
+      border-radius: 24px;
+      transition: 0.2s ease;
+    }
+
+    .main_service .list_box .list_category span {
+      display: block;
+      letter-spacing: -.09px;
+    }
+
+    .main_service .list_box .list_category .img_box {
+      position: relative;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .main_service .list_box .list_category .img_box img {
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .main_service .list_box .list_category .tit {
+      font-size: 20px;
+      font-weight: 700;
+      color: #202225;
+      line-height: 24px;
+    }
+
+    .main_service .list_box .list_category .desc {
+      margin-top: 16px;
+      color: #6F7277;
+      line-height: 20px;
+    }
+
+    .main_service .list_box .list_category .more {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #d9d9d9;
+    }
+
+    .main_service .list_box .list_category .more span {
+      position: relative;
+      font-size: 16px;
+      font-weight: 700;
+      color: #202225;
+      line-height: 24px;
+    }
+
+    .main_service .list_box .list_category .more span::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 24px;
+      height: 24px;
+      background: url(https://pg.shinhan.com/srs/htdocs/images/common/ico_more.svg) no-repeat center / 24px;
+      transform: translateY(-50%);
+    }
+
+    /*--------------- 신한PG소개 끝 ---------------*/
+
+    /*-------------------- 차별화된 서비스 시작 --------------------*/
+    .main_pg_service {
+      overflow: hidden;
+      position: relative;
+      background: transparent url(https://pg.shinhan.com/srs/htdocs/images/main/bg_service_pc.png) no-repeat 0 0 / cover;
+    }
+
+    .main_pg_service::before {
+      position: absolute;
+      content: "";
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(32, 34, 37, .6);
+    }
+
+    .main_pg_service .inner {
+      position: relative;
+      display: flex;
+      padding: 160px 120px;
+      flex-direction: column;
+      gap: 60px;
+      align-items: center;
+      justify-content: center;
+      align-self: stretch;
+      z-index: 1;
+    }
+
+    .main_pg_service .tit_box {
+      text-align: center;
+      color: #fff;
+    }
+
+    .main_pg_service .tit_box em {
+      display: block;
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: -0.12px;
+      padding-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .main_pg_service .tit_box h2 {
+      font-family: 'OneShinhan';
+      font-size: 48px;
+      line-height: 56px;
+      letter-spacing: -0.24px;
+      padding-bottom: 24px;
+      font-weight: bold;
+    }
+
+    .main_pg_service .tit_box h2 strong {
+      color: #5EE1FF;
+    }
+
+    .main_pg_service .tit_box span {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.09px;
+    }
+
+    .main_pg_service .inner ol {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      flex-direction: row;
+      align-self: stretch;
+      max-width: 1440px;
+      transition: all .4s linear;
+      color: #fff;
+      gap: 8px;
+    }
+
+    .main_pg_service ol li {
+      position: relative;
+      display: flex;
+      flex: 0 1 calc(20% - 10px);
+      flex-direction: column;
+      padding: 0;
+      /* align-items: center; */
+      gap: 0;
+    }
+
+    .main_pg_service ol li div {
+      width: auto !important;
+      text-align: center;
+    }
+
+    .main_pg_service ol li img {
+      display: inline;
+      max-width: 288px;
+    }
+
+    .main_pg_service ol li span {
+      display: block;
+      padding: 0 16px;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.08px;
+      text-align: center;
+    }
+
+    .main_pg_service ol li span em {
+      font-weight: bold;
+      color: #8cffff;
+    }
+
+    /*-------------------- 차별화된 서비스 끝 --------------------*/
+
+    /*-------------------- main_partner 시작 --------------------*/
+    .main_partner .inner {
+      position: relative;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 120px 80px 0;
+    }
+
+    .main_partner .tit_box {
+      padding-bottom: 40px;
+    }
+
+    .main_partner .tit_box em {
+      font-style: normal;
+      display: block;
+      color: #fb521c;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: -0.12px;
+      padding-bottom: 8px;
+    }
+
+    .main_partner .tit_box h2 {
+      font-family: 'OneShinhan';
+      font-size: 48px;
+      line-height: 56px;
+      letter-spacing: -0.24px;
+      font-weight: 700;
+      color: #202225;
+    }
+
+    .main_partner .tit_box h2 span {
+      display: inline-block;
+      overflow: hidden;
+      color: transparent;
+      vertical-align: bottom;
+      width: 117px;
+      height: 56px;
+      background: transparent url(https://pg.shinhan.com/srs/htdocs/images/main/logo_ddangyo.svg) no-repeat 0 0 / 117px 56px;
+      margin-right: -15px;
+    }
+
+    .main_partner .con_box {
+      display: flex;
+      padding: 64px 80px;
+      gap: 40px;
+      flex-direction: column;
+      border-radius: 24px;
+      background: #fb521c;
+      color: #fff;
+    }
+
+    .main_partner .con_box .txt {
+      font-size: 40px;
+      line-height: 48px;
+      letter-spacing: -0.2px;
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .main_partner .con_box ul {
+      gap: 40px;
+    }
+
+    .main_partner .con_box ul li {
+      padding-bottom: 0;
+    }
+
+    .main_partner .con_box ul li p {
+      padding-bottom: 24px;
+    }
+
+    .main_partner .con_box ul li p img {
+      width: 100%;
+    }
+
+    .main_partner .con_box ul li strong {
+      display: block;
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: -0.12px;
+      padding-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .main_partner .con_box ul li span {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.08px;
+      font-weight: 500;
+    }
+
+    .main_partner .img_delivery {
+      display: block;
+      width: 274px;
+      height: 319px;
+      position: absolute;
+      top: 80px;
+      right: 130px;
+      transition: all 0.4s linear;
+      display: none;
+    }
+
+    .main_partner .partners_logo {
+      padding: 64px 0;
+    }
+
+    .main_partner .partners_logo p {
+      font-size: 32px;
+      line-height: 40px;
+      letter-spacing: -0.16px;
+      padding-bottom: 24px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .partners_logo .logo_box {
+      overflow: hidden;
+    }
+
+    .partners_logo ul {
+      display: flex;
+      padding-bottom: 12px;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .partners_logo .logo_box:last-child ul {
+      padding-bottom: 0;
+    }
+
+    /* .partners_logo ul li { width: 105px; } */
+    .partners_logo .logo_box:last-child ul img {
+      width: 210px;
+    }
+
+    /*-------------------- main_partner 끝 --------------------*/
+
+    /*-------------------- main_apply_guide 시작 --------------------*/
+    .main_apply_guide {
+      position: relative;
+    }
+
+    .main_apply_guide .apply_bg {
+      position: absolute;
+      background-attachment: fixed !important;
+      /*   스크롤해도 배경은 그대로 */
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: url(https://pg.shinhan.com/srs/htdocs/images/main/bg_main_apply_pc.jpg) no-repeat 50% 50% / cover !important;
+    }
+
+    .main_apply_guide .apply_bg::before {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(32, 34, 37, 0.5);
+    }
+
+    .main_apply_guide .apply_con_wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 240px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .main_apply_guide .apply_con_wrap .inner {
+      padding: 40px 20px;
+    }
+
+    .main_apply_guide .apply_con_wrap .top_wrap {
+      color: #fff;
+      text-align: center;
+    }
+
+    .main_apply_guide .apply_con_wrap .top_wrap .tit {
+      font-size: 32px;
+      line-height: 40px;
+      font-weight: bold;
+    }
+
+    .main_apply_guide .apply_con_wrap .top_wrap .desc {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: bold;
+      margin-right: 32px;
+    }
+
+    .main_apply_guide .apply_con_wrap .top_wrap .desc::after {
+      position: absolute;
+      content: "";
+      display: inline-block;
+      left: 63%;
+      width: 32px;
+      height: 32px;
+      background: url(./Shinhan_logo/ico_more_white.svg) no-repeat center / 32px;
+    }
+
+    /*-------------------- main_apply_guide 끝 --------------------*/
+
+    /*-------------------- main_faq 시작 --------------------*/
+    .container {
+      padding-top: 0;
+    }
+
+    .main_faq .inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 80px;
+    }
+
+    .main_faq .top_area {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .main_faq .tit_wrap .tit_depth4 {
+      font-weight: 700;
+      color: #0046ff;
+      font-size: 24px;
+      line-height: 32px;
+      letter-spacing: -0.12px;
+    }
+
+    .main_faq .tit_wrap .tit_depth2 {
+      font-family: 'OneShinhan';
+      font-weight: 700;
+      margin-top: 8px;
+      font-size: 32px;
+      line-height: 40px;
+      letter-spacing: -0.24px;
+    }
+
+    .main_faq .top_area .btn_more {
+      position: relative;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 32px;
+      letter-spacing: -0.12px;
+      margin-right: 32px;
+    }
+
+    .main_faq .top_area .btn_more::after {
+      position: absolute;
+      content: "";
+      display: inline-block;
+      background: url(./Shinhan_logo/ico_more.svg) no-repeat 0 0 / 24px;
+      width: 24px;
+      height: 24px;
+      margin-top: 4px;
+      margin-left: 8px;
+      vertical-align: top;
+    }
+
+    .main_faq .faq_list {
+      margin-top: 40px;
+    }
+
+    .main_faq .faq_list li:first-child {
+      margin-top: 0px;
+    }
+
+    .main_faq .faq_list li {
+      margin-top: 8px;
+    }
+
+    .faq_list li .acc_head .btn_que {
+      border: none;
+      display: flex;
+      position: relative;
+      padding: 24px 104px 24px 40px;
+      width: 100%;
+      background-color: #f9fafb;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: -0.09px;
+      text-align: left;
+      word-break: break-all;
+      cursor: pointer;
+      font-family: 'Pretendard';
+    }
+
+    .faq_list li .acc_head .btn_que span {
+      display: block;
+      color: #202225;
+      width: 120px;
+      margin-right: 40px;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: -0.09px;
+    }
+
+    .faq_list li .acc_head .btn_que .ico_q {
+      width: 24px;
+      height: 24px;
+      margin-right: 16px;
+      background: url(https://pg.shinhan.com/srs/htdocs/images/customer/ico_q.svg) no-repeat 0 0 / 24px;
+    }
+
+    .faq_list li .acc_head .btn_que .ico_down {
+      position: absolute;
+      display: inline-block;
+      right: 40px;
+      top: 50%;
+      margin-top: -12px;
+      width: 24px;
+      height: 24px;
+      background: url(https://pg.shinhan.com/srs/htdocs/images/common/ico_arw_down.svg) no-repeat 50% 50% / 24px;
+      transition: all 0.3s;
+    }
+
+    .faq_list li .acc_head.on .btn_que .ico_down {
+      transform: rotate(-180deg);
+      transition: all 0.3s;
+    }
+
+    .faq_list li .acc_body {
+      display: none;
+      position: relative;
+      padding: 16px 40px 24px 240px;
+      background-color: #f9fafb;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .faq_list li .acc_body .editor {
+      position: relative;
+      color: #6f7277;
+      word-break: break-all;
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: -0.09px;
+    }
+
+    .faq_list li .acc_body .editor::before {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: -40px;
+      width: 24px;
+      height: 24px;
+      background: url(./Shinhan_logo/ico_a.svg) no-repeat 0 0 / 24px;
+    }
+
+    /*-------------------- main_faq 끝 --------------------*/
+
+    /*-------------------- footer 시작 --------------------*/
+    .footer_dev {
+      width: 100%;
+      height: 196px;
+      color: #202225;
+      background: #171a1f;
+    }
+
+    .footer_dev .inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 40px;
+      font-size: 14px;
+      position: relative;
+      gap: 80px;
+    }
+
+    .footer_dev .f_top {
+      align-items: center;
+      gap: 80px;
+    }
+
+    .footer_dev .f_top .f_logo {
+      flex: none;
+      width: 136px;
+      height: 32px;
+      background: url(https://pg.shinhan.com/srs/htdocs/images/common/f_logo.svg) no-repeat 0 0 / 100%;
+    }
+
+    .footer_dev .f_top .f_link ul {
+      gap: 16px 32px;
+    }
+
+    .footer_dev .f_top .f_link ul li a {
+      color: #b2b4b8;
+      display: block;
+      font-size: 16px;
+    }
+
+    .footer_dev .f_info {
+      padding-top: 20px;
+    }
+
+    .footer_dev .f_info ul li {
+      position: relative;
+      /*   padding-left: 24px; */
+      color: #b2b4b8;
+      font-size: 16px;
+    }
+
+    .footer_dev .f_info ul li::before {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background: url();
+    }
+
+    .footer_dev .copyright {
+      color: #999;
+      padding-top: 24px;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: -0.08px;
+    }
+
+    /* footer 오른쪽 */
+    .footer_dev .f_family {
+      margin-left: auto;
+      padding-top: 0;
+      position: relative;
+    }
+
+    .footer_dev .f_family .btn {
+      width: 200px;
+      /*   position: relative; */
+      height: 40px;
+      padding: 0 50px 0 24px;
+      border-radius: 20px;
+      background: #1d2229;
+      text-align: left;
+    }
+
+    button {
+      overflow: visible;
+      border: 0;
+      background: none;
+      cursor: pointer;
+    }
+
+    .footer_dev .f_family .btn span {
+      color: #b2b4b8;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 14px;
+      letter-spacing: -0.05px;
+    }
+
+    .footer_dev .f_family .btn i {
+      float: right;
+      color: #b2b4b8;
+      font-size: 16px;
+      transform: translatex(170%);
+    }
+
+    .footer_dev .f_family .family_site_list {
+      bottom: 120px;
+      overflow: hidden;
+      position: absolute;
+      width: 100%;
+      height: 0;
+      border-radius: 12px;
+      background: #1d2229;
+      transition: height 0.3s ease;
+    }
+
+    .footer_dev .f_family .family_site_list ul {
+      padding: 6px 0;
+    }
+
+    .footer_dev .f_family .family_site_list ul li a {
+      display: block;
+      padding: 12px 24px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #b2b4b8;
+      line-height: 14px;
+      letter-spacing: -0.05px;
+    }
+
+    .footer_dev .f_family .family_site_list.active {
+      height: 88px;
+    }
+
+    /*-------------------- footer 끝 --------------------*/
+
+    /*-------------------- @media 시작 --------------------*/
+    /*-------------------- @media (min-width: 1024px) --------------------*/
+    @media screen and (min-width: 1024px) {
+
+      /*--------------- header ---------------*/
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        height: 80px;
+        transition: all 0.2s;
+      }
+
+      .header::after {
+        content: "";
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        height: 1px;
+        background: #e6eaed;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+        height: 0;
+        background: #fff;
+        transition: all 0.3s;
+      }
+
+      .header.pc_on::before {
+        height: 192px;
+        box-shadow: 0px 12px 20px 0px rgba(32, 34, 37, 0.05);
+      }
+
+      .header .inner {
+        height: 80px;
+        padding: 0 40px;
+      }
+
+      .header .h_top {
+        position: initial;
+        height: auto;
+        transform: none;
+        transition: none;
+      }
+
+      .header .logo {
+        position: absolute;
+        width: 184px;
+        height: 80px;
+        z-index: 110;
+      }
+
+      .header .logo .ico {
+        width: 184px;
+        height: 32px;
+      }
+
+      .header .btn_dropdown {
+        display: none;
+      }
+
+      .header .nav {
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+
+      .header .nav .navbar {
+        overflow-y: unset;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: row;
+        gap: 80px;
+        position: initial;
+        height: auto;
+        padding: 0;
+        background: transparent;
+      }
+
+      .header .navbar>li {
+        position: relative;
+        height: 100%;
+        transition: all 0.3s ease;
+      }
+
+      .header .navbar>li .sub_menu {
+        display: flex !important;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 0 64px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        visibility: hidden;
+        opacity: 0;
+        width: 246px;
+        max-height: 192px;
+        padding: 16px 0;
+      }
+
+      .header.pc_on .navbar>li.pc_active .sub_menu {
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.5s;
+      }
+
+      .header.pc_on .navbar>li.pc_active::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        z-index: 30;
+        width: 100%;
+        height: 2px;
+        background: #202225;
+      }
+
+      .header .navbar>li>a {
+        display: flex;
+        align-items: center;
+        height: 80px;
+        padding: 0;
+      }
+
+      .header .navbar>li.has_sub>a::after {
+        display: none;
+      }
+
+      .header .navbar>li>a.ico_arw::after {
+        display: none;
+      }
+
+      .header .navbar>li>a.ico_arw {
+        height: auto;
+        margin-left: 20px;
+        padding: 6px 20px;
+        border: 1px solid #0046ff;
+        border-radius: 28px;
+        font-size: 16px;
+        color: #0046ff;
+        letter-spacing: -0.08px;
+      }
+
+      .header .navbar>li .sub_menu li a {
+        padding: 8px 0;
+        font-size: 18px;
+        letter-spacing: -0.09px;
+      }
+
+      .header .navbar>li .sub_menu li a:hover {
+        font-weight: 700;
+      }
+
+      .header.col_white::after {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .header.col_white .navbar>li>a {
+        color: #fff;
+      }
+
+      .header.col_white .navbar>li>a.ico_arw {
+        border: 1px solid #fff;
+      }
+
+      .header.col_white.pc_on {
+        background: #fff;
+      }
+
+      .header.col_white.pc_on::after {
+        background: #e6eaed;
+      }
+
+      .header.col_white.pc_on .logo .ico {
+        background: url(https://pg.shinhan.com/srs/htdocs/images/common/gnb_logo.svg) no-repeat 0 0 / 100% 100%;
+      }
+
+      .header.col_white.pc_on .navbar>li>a {
+        color: #2c3238;
+      }
+
+      .header.col_white.pc_on .navbar>li>a.ico_arw {
+        border: 1px solid #0046ff;
+        color: #0046ff;
+      }
+
+      .header:hover {
+        background-color: #fff;
+      }
+
+      .header:hover .navbar>li a {
+        color: #202225;
+      }
+
+      .header:hover .logo .ico {
+        background: url(https://pg.shinhan.com/srs/htdocs/images/common/gnb_logo.svg) no-repeat 0 0 / 100% 100%;
+      }
+
+      .header:hover .navbar>li>a.ico_arw {
+        height: auto;
+        margin-left: 20px;
+        padding: 6px 20px;
+        border: 1px solid #0046ff;
+        border-radius: 28px;
+        font-size: 16px;
+        color: #0046ff;
+        letter-spacing: -0.08px;
+      }
+
+      /*--------------- header ---------------*/
+      .header_dev {
+        height: 80px;
+        background: #fff;
+        transition: all 0.2s;
+      }
+
+      .header_dev.col_white {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .header_dev .inner {
+        height: 80px;
+        padding: 0 40px;
+      }
+
+      .header_dev .h_top {
+        position: initial;
+        height: auto;
+        padding: 0;
+        transform: none;
+        transition: none;
+      }
+
+      .header_dev .logo {
+        position: absolute;
+        width: 183px;
+        height: 80px;
+        z-index: 110;
+      }
+
+      .header_dev .logo .ico {
+        width: 183px;
+        height: 32px;
+      }
+
+      .header_dev .btn_dropdown {
+        display: none;
+      }
+
+      .header_dev .nav_dev {
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+
+      .header_dev .nav_dev .navbar_dev {
+        overflow-y: unset;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: row;
+        gap: 2%;
+        position: initial;
+        height: auto;
+        padding: 0;
+        background: transparent;
+      }
+
+      .header_dev .navbar_dev>li {
+        position: relative;
+        height: 100%;
+        transition: all 0.3s ease;
+      }
+
+      .header_dev .navbar_dev>li:last-child {
+        padding-right: 0;
+      }
+
+      .header_dev .navbar_dev>li .sub_menu {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        position: absolute;
+        top: 62px;
+        left: 1vw;
+        overflow: hidden;
+        visibility: hidden;
+        width: 140px;
+        padding: 12px 8px;
+        border-radius: 16px;
+        border: 1px solid #dbdee1;
+        background: #fff;
+      }
+
+      .header_dev .navbar_dev>li.has_sub>a.active+.sub_menu {
+        height: 0;
+      }
+
+      .header_dev .navbar_dev>li>a {
+        display: flex;
+        align-items: center;
+        height: 80px;
+        padding: 0 2vw;
+        color: #202225;
+        opacity: 0.8;
+      }
+
+      .header_dev.col_white .navbar_dev>li>a {
+        color: #fff;
+      }
+
+      .header_dev.col_white .navbar_dev>li>a:hover {
+        color: #fff;
+      }
+
+      .header_dev .navbar_dev>li.has_sub>a::after {
+        display: none;
+      }
+
+      .header_dev .navbar_dev>li>a.ico_arw span {
+        padding: 6px 20px;
+        color: #0046ff;
+        border: 1px solid #0046ff;
+        border-radius: 28px;
+      }
+
+      .header_dev.col_white .navbar_dev>li>a.ico_arw span {
+        color: #fff;
+        border: 1px solid #fff;
+      }
+
+      .header_dev .navbar_dev>li>a.ico_arw::after {
+        display: none;
+      }
+
+      .header_dev .navbar_dev>li .sub_menu li a {
+        padding: 12px;
+        font-size: 16px;
+        color: #202225;
+        opacity: 0.8;
+      }
+
+      .header_dev .navbar_dev>li .sub_menu li a:hover {
+        border-radius: 8px;
+        background: #f3f6ff;
+        font-weight: 700;
+        color: #202225;
+        opacity: 1;
+      }
+
+      .header_dev .navbar_dev>li>a.focused+.sub_menu a:focus {
+        border-radius: 8px;
+        background: #f3f6ff;
+        font-weight: 700;
+        color: #202225;
+        opacity: 1;
+      }
+
+      .header_dev .navbar_dev>li:hover>a {
+        opacity: 1;
+      }
+
+      .header_dev .navbar_dev>li.has_sub:hover>a+.sub_menu {
+        overflow: visible;
+        visibility: visible;
+        height: auto !important;
+        max-height: unset !important;
+      }
+
+      .header_dev.hide .navbar_dev>li.has_sub:hover>a+.sub_menu {
+        display: none;
+      }
+
+      .header_dev .navbar_dev>li>a.focused {
+        opacity: 1;
+      }
+
+      .header_dev .navbar_dev>li.has_sub>a.focused+.sub_menu {
+        overflow: visible;
+        visibility: visible;
+        height: auto !important;
+        max-height: unset !important;
+      }
+
+      .wrap.pc_down .header_dev {
+        height: 64px;
+      }
+
+      .wrap.pc_down .header_dev .inner {
+        height: 64px;
+      }
+
+      .wrap.pc_down .header_dev .logo {
+        height: 64px;
+      }
+
+      .wrap.pc_down .header_dev .logo .ico {
+        height: 64px;
+      }
+
+      .wrap.pc_down .header_dev .navbar_dev>li>a {
+        height: 64px;
+      }
+
+      .wrap.pc_down .header_dev .navbar_dev>li .sub_menu {
+        top: 50px;
+      }
+
+      .header_dev:hover {
+        background-color: #fff;
+      }
+
+      .header_dev:hover .navbar_dev>li a {
+        color: #202225;
+      }
+
+      .header_dev:hover .logo .ico {
+        background: url(https://pg.shinhan.com/srs/htdocs/images/common/gnb_logo.svg) no-repeat 0 0 / 100% 100%;
+      }
+
+      .header_dev.col_white:hover .navbar_dev>li>a:hover {
+        color: #202225;
+      }
+
+      .header_dev.col_white:hover .navbar_dev>li>a.ico_arw span {
+        color: #0046ff;
+        border: 1px solid #0046ff;
+      }
+
+      /*--------------- 신한PG소개 ---------------*/
+      .main_service {
+        overflow: hidden;
+        min-height: 100vh;
+        background: url(https://pg.shinhan.com/srs/htdocs/images/main/bg_main_card.jpg) no-repeat 50% 50% / cover;
+      }
+
+      .main_service.active01 .list_category.card,
+      .main_service.active02 .list_category.virtual,
+      .main_service.active03 .list_category.transfer,
+      .main_service.active04 .list_category.payment,
+      .main_service.active05 .list_category.brand,
+      .main_service.active06 .list_category.escrow,
+      .main_service.active07 .list_category.request {
+        background-color: #fff;
+      }
+
+      .main_service.active01 .list_category.card .img_box::before,
+      .main_service.active02 .list_category.virtual .img_box::before,
+      .main_service.active03 .list_category.transfer .img_box::before,
+      .main_service.active04 .list_category.payment .img_box::before,
+      .main_service.active05 .list_category.brand .img_box::before,
+      .main_service.active06 .list_category.escrow .img_box::before,
+      .main_service.active07 .list_category.request .img_box::before {
+        content: none;
+      }
+
+      .main_service.active01 .list_category.card .tit,
+      .main_service.active02 .list_category.virtual .tit,
+      .main_service.active03 .list_category.transfer .tit,
+      .main_service.active04 .list_category.payment .tit,
+      .main_service.active05 .list_category.brand .tit,
+      .main_service.active06 .list_category.escrow .tit,
+      .main_service.active07 .list_category.request .tit {
+        color: #202225;
+      }
+
+      .main_service.active01 .list_category.card .desc,
+      .main_service.active02 .list_category.virtual .desc,
+      .main_service.active03 .list_category.transfer .desc,
+      .main_service.active04 .list_category.payment .desc,
+      .main_service.active05 .list_category.brand .desc,
+      .main_service.active06 .list_category.escrow .desc,
+      .main_service.active07 .list_category.request .desc {
+        color: #6F7277;
+      }
+
+      .main_service.active01 .list_category.card .more,
+      .main_service.active02 .list_category.virtual .more,
+      .main_service.active03 .list_category.transfer .more,
+      .main_service.active04 .list_category.payment .more,
+      .main_service.active05 .list_category.brand .more,
+      .main_service.active06 .list_category.escrow .more,
+      .main_service.active07 .list_category.request .more {
+        height: 24px;
+        margin-top: 16px;
+        padding-top: 16px;
+        opacity: 1;
+      }
+
+      .main_service.active01 .service_bg .bg1,
+      .main_service.active02 .service_bg .bg2,
+      .main_service.active03 .service_bg .bg3,
+      .main_service.active04 .service_bg .bg4,
+      .main_service.active05 .service_bg .bg5,
+      .main_service.active06 .service_bg .bg6,
+      .main_service.active07 .service_bg .bg7 {
+        opacity: 1;
+      }
+
+      .main_service .inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 80px;
+      }
+
+      .main_service .service_bg .bg1 {
+        background-image: url(https://pg.shinhan.com/srs/htdocs/images/main/bg_main_card.jpg);
+      }
+
+      .main_service .service_bg .bg2 {
+        background-image: url(https://pg.shinhan.com/srs/htdocs/images/main/bg_main_virtual.jpg);
+      }
+
+      .main_service .service_bg .bg3 {
+        background-image: url(https://pg.shinhan.com/srs/htdocs/images/main/bg_main_account.jpg);
+      }
+
+      .main_service .service_bg .bg4 {
+        background-image: url(https://pg.shinhan.com/srs/htdocs/images/main/bg_main_regular.jpg);
+      }
+
+      .main_service .service_bg .bg5 {
+        background-image: url(https://pg.shinhan.com/srs/htdocs/images/main/bg_main_brand.jpg);
+      }
+
+      .main_service .service_bg .bg6 {
+        background-image: url(https://pg.shinhan.com/srs/htdocs/images/main/bg_main_escrow.jpg);
+      }
+
+      .main_service .service_bg .bg7 {
+        background-image: url(https://pg.shinhan.com/srs/htdocs/images/main/bg_main_agency.jpg);
+      }
+
+      .main_service .service_cont {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        height: 840px;
+        transition: all 0.6s ease;
+      }
+
+      .main_service .tit_box {
+        width: 360px;
+        margin-top: 340px;
+      }
+
+      .main_service .tit_box .tit_depth1 {
+        font-size: 40px;
+        line-height: 48px;
+      }
+
+      .main_service .tit_box .desc {
+        font-size: 18px;
+      }
+
+      .main_service .list_box {
+        padding: 200px 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 120px 40px;
+        width: 530px;
+        margin-top: 0;
+      }
+
+      .main_service .list_box li {
+        height: 480px;
+      }
+
+      .main_service .list_box li:nth-child(2n) .list_category {
+        margin-top: 300px;
+      }
+
+      .main_service .list_box .list_category {
+        display: flex;
+        flex-direction: column;
+        width: 232px;
+        height: 480px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        box-sizing: border-box;
+      }
+
+      .main_service .list_box .list_category.virtual {
+        margin-top: 300px;
+      }
+
+      .main_service .service_cont .list_box .list_category .inner {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 24px;
+        background: transparent;
+      }
+
+      .main_service .list_box .img_box::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        border-top-left-radius: 24px;
+        border-top-right-radius: 24px;
+        opacity: .5;
+        transition: all .4s ease;
+      }
+
+      .main_service .list_box .list_category .img_box img {
+        width: 100%;
+        height: 100%;
+        border-top-right-radius: 24px;
+        border-top-left-radius: 24px;
+      }
+
+      .main_service .list_box .list_category .tit {
+        margin-top: 0;
+        font-size: 26px;
+        line-height: 32px;
+        color: #fff;
+        transition: 0.25s ease;
+      }
+
+      .main_service .list_box .list_category .desc {
+        flex: 1;
+        font-size: 16px;
+        line-height: 24px;
+        color: #e6eaed;
+        transition: 0.25s ease;
+      }
+
+      .main_service .list_box .list_category .more {
+        height: 0;
+        margin-top: 0;
+        padding-top: 0;
+        transition: 0.3s ease;
+        opacity: 0;
+      }
+
+      .main_service .list_box .list_category .more span {
+        font-size: 18px;
+      }
+
+      /*---------- 차별화된 서비스 ----------*/
+      .main_pg_service .inner ol {
+        margin: 0 auto;
+      }
+
+      .main_pg_service .inner ol li strong {
+        display: none;
+      }
+
+      /*---------- partners_logo ----------*/
+      .partners_logo p br {
+        display: none;
+      }
+
+      .main_faq .tit_wrap .tit_depth2 br {
+        display: none;
+      }
+
+      .main_apply_guide .top_wrap .tit br {
+        display: none;
+      }
+    }
+
+    /*--------------- @media min-width:1440px ---------------*/
+    @media screen and (min-width: 1440px) {
+
+      /*--------------- 신한PG소개 ---------------*/
+      .main_service .inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0;
+      }
+
+      .main_service .tit_box .tit_depth1 {
+        font-size: 48px;
+        line-height: 56px;
+      }
+
+      .main_service .list_box {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 120px 40px;
+        width: 720px;
+      }
+
+      .main_service .list_box .list_category {
+        width: 340px;
+        box-sizing: border-box;
+      }
+
+      .main_service .list_box .list_category .inner {
+        padding: 32px;
+      }
+
+      .main_service .service_cont .list_box .list_category .inner {
+        padding: 32px;
+      }
+
+      .main_service .list_box .list_category .desc {
+        font-size: 18px;
+        line-height: 24px;
+      }
+
+      /*--------------- 파트너 ---------------*/
+      .main_partner .img_delivery {
+        display: block;
+      }
+    }
+
+    /*--------------- @media min-width:1500px ---------------*/
+    @media screen and (min-width:1500px) {
+      .main_service .inner {
+        max-width: 1440px;
+      }
+    }
+
+
+    /*---------- @media max-width: 1024px ----------*/
+    @media screen and (max-width: 1024px) {
+
+      /* 메인 슬라이드 */
+      .visual-sec {
+        overflow: hidden;
+        min-height: 500px;
+      }
+
+      .visual-sec .inner {
+        position: absolute;
+        top: auto;
+        bottom: 128px;
+        left: 20px;
+        right: 20px;
+        height: auto;
+      }
+
+      .visual-sec .txt-box .tit {
+        font-size: 32px;
+        line-height: 40px;
+      }
+
+      .visual-sec .txt-box .desc {
+        margin-top: 24px;
+      }
+
+      .visual-sec .txt-box .desc p {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .visual-sec .control {
+        bottom: 80px;
+        left: 20px;
+        width: 90%;
+      }
+
+      .swiper-pagination-bullet {
+        width: 40px;
+      }
+
+      .visual-sec .swiper-button-prev,
+      .swiper-button-next {
+        display: none;
+      }
+
+      .visual-sec .scroll_down {
+        bottom: 20px;
+        right: 20px;
+      }
+
+      /*---------- 차별화된 서비스 ----------*/
+      .main_pg_service .inner {
+        padding: 64px 20px;
+        align-items: flex-start;
+        gap: 40px;
+      }
+
+      .main_pg_service .tit_box {
+        text-align: left;
+      }
+
+      .main_pg_service .tit_box em {
+        font-size: 18px;
+        line-height: 24px;
+      }
+
+      .main_pg_service .tit_box h2 {
+        padding-bottom: 16px;
+        font-size: 32px;
+        line-height: 40px;
+      }
+
+      .main_pg_service .tit_box span {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .main_pg_service ol {
+        display: flex;
+        flex-direction: column !important;
+        align-items: flex-start;
+        gap: 8px;
+        align-self: stretch;
+      }
+
+      .main_pg_service ol li {
+        position: relative;
+        display: flex;
+        padding: 12px 16px 12px 58px;
+        align-items: center;
+        gap: 4px;
+        align-self: stretch;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.90);
+      }
+
+      .main_pg_service ol li:nth-child(even) {
+        background: rgba(209, 255, 255, 0.90);
+      }
+
+      .main_pg_service ol li::after {
+        position: absolute;
+        left: 16px;
+        top: 12px;
+        width: 38px;
+        height: 22px;
+        border-radius: 48px;
+        background: #0046FF;
+        font-size: 12px;
+        line-height: 22px;
+        font-weight: 700;
+        color: #fff;
+        text-align: center;
+      }
+
+      .main_pg_service ol li:nth-child(1)::after {
+        content: "01";
+      }
+
+      .main_pg_service ol li:nth-child(2)::after {
+        content: "02";
+      }
+
+      .main_pg_service ol li:nth-child(3)::after {
+        content: "03";
+      }
+
+      .main_pg_service ol li:nth-child(4)::after {
+        content: "04";
+      }
+
+      .main_pg_service ol li:nth-child(5)::after {
+        content: "05";
+      }
+
+      .main_pg_service ol li strong {
+        font-size: 14px;
+        line-height: 20px;
+        color: #202225;
+      }
+
+      .main_pg_service ol li img {
+        display: none;
+      }
+
+      .main_pg_service ol li span {
+        display: none;
+      }
+
+      /*---------- main_partner ----------*/
+      .main_partner .inner {
+        padding: 64px 20px 0;
+      }
+
+      .main_partner .tit_box {
+        padding-bottom: 20px;
+      }
+
+      .main_partner .tit_box em {
+        font-size: 18px;
+        line-height: 24px;
+      }
+
+      .main_partner .tit_box h2 {
+        font-size: 32px;
+        line-height: 40px;
+      }
+
+      .main_partner .tit_box h2 span {
+        width: 83px;
+        height: 40px;
+        display: inline-block;
+        overflow: hidden;
+        background: transparent url(https://pg.shinhan.com/srs/htdocs/images/main/logo_ddangyo.svg) no-repeat 0 0 / 83px 40px;
+      }
+
+      .main_partner .con_box {
+        padding: 32px 20px;
+        gap: 20px;
+      }
+
+      .main_partner .con_box ul {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .main_partner .con_box .txt {
+        font-size: 20px;
+        line-height: 28px;
+        letter-spacing: 0px;
+      }
+
+      .main_partner .con_box .txt br {
+        display: none;
+      }
+
+      .main_partner .con_box li {
+        padding-bottom: 32px !important;
+      }
+
+      .main_partner .con_box li p {
+        padding-bottom: 24px;
+      }
+
+      .main_partner .con_box li:last-child {
+        padding-bottom: 0 !important;
+      }
+
+      .partners_logo p {
+        font-size: 20px !important;
+        line-height: 28px !important;
+      }
+
+      .main_partner .con_box li p img {
+        width: 100%;
+      }
+
+      .main_partner .con_box li strong {
+        display: block;
+        font-size: 18px !important;
+        line-height: 24px !important;
+      }
+
+      .main_partner .con_box li span {
+        font-size: 14px !important;
+        line-height: 20px !important;
+      }
+
+      /* .partners_logo .logo_box ul li {
+        width: 105px;
+      } */
+
+      /*---------- main_apply_guide ----------*/
+      .main_apply_guide .apply_bg {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .main_apply_guide .apply_con_wrap {
+        height: 184px;
+        display: block;
+      }
+
+      .main_apply_guide .apply_con_wrap .top_wrap .tit {
+        font-size: 20px;
+        line-height: 28px;
+      }
+
+      .main_apply_guide .apply_con_wrap .top_wrap .desc {
+        left: -20px;
+        margin-right: 0;
+      }
+
+      .main_apply_guide .apply_con_wrap .top_wrap .desc::after {
+        left: 60%;
+      }
+
+      /*---------- main_faq ----------*/
+      .main_faq .inner {
+        padding: 64px 20px;
+      }
+
+      .main_faq .tit_wrap .tit_depth4 {
+        font-size: 18px;
+        line-height: 24px;
+      }
+
+      .main_faq .tit_wrap .tit_depth2 {
+        font-size: 24px;
+        line-height: 32px;
+      }
+
+      .main_faq .top_area .btn_more {
+        font-size: 16px;
+      }
+
+      .main_faq .top_area .btn_more::after {
+        width: 16px;
+        height: 24px;
+        background: url(./Shinhan_logo/ico_more.svg) no-repeat 50% 50% / 16px 24px;
+      }
+
+      .main_faq .faq_list {
+        margin-top: 32px;
+      }
+
+      .faq_list li .acc_head .btn_que {
+        padding: 16px 56px 16px 16px;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .faq_list li .acc_head .btn_que span {
+        display: none;
+        flex: none;
+      }
+
+      .faq_list li .acc_head .btn_que i {
+        width: 20px;
+        height: 20px;
+        flex: none;
+      }
+
+      .faq_list li .acc_head .btn_que .ico_q {
+        margin-right: 8px;
+        background: url(./Shinhan_logo/ico_q.svg) no-repeat 0 0 / 20px;
+      }
+
+      .faq_list li .acc_head .btn_que .ico_down {
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        margin: -12px 0 0;
+        margin-right: -21px;
+      }
+
+      .faq_list li .acc_body {
+        padding: 8px 16px 16px 48px;
+      }
+
+      .faq_list li .acc_body .editor {
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .faq_list li .acc_body .editor::before {
+        width: 20px;
+        height: 20px;
+        background: url(./Shinhan_logo/ico_a.svg) no-repeat 0 0 / 20px;
+        top: 0;
+        left: -32px;
+      }
+
+      /*---------- footer ----------*/
+      .footer_dev .inner {
+        background-color: #171A1F;
+        padding: 40px 20px;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .footer_dev .f_top {
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+        align-items: start;
+      }
+
+      .footer_dev .f_top .f_logo {
+        width: 110px;
+        height: 32px;
+      }
+
+      .footer_dev .f_top .f_link {
+        width: 100%;
+        padding-top: 20px;
+      }
+
+      .footer_dev .f_top .f_link ul {
+        gap: 16px;
+      }
+
+      .footer_dev .f_top .f_link ul li a {
+        font-size: 12px;
+        line-height: 14px;
+      }
+
+      .footer_dev .f_info {
+        padding-top: 20px;
+      }
+
+      .footer_dev .f_info a {
+        font-size: 13px;
+      }
+
+      .footer_dev .copyright {
+        padding-top: 20px;
+        font-size: 13px;
+        line-height: 16px;
+      }
+
+      .footer_dev .f_family {
+        position: relative;
+        padding-top: 40px;
+        margin: 0;
+      }
+
+      .footer_dev .f_family .btn {
+        position: relative;
+        width: 100% !important;
+        height: 40px;
+        padding: 0 50px 0 24px;
+        text-align: left;
+      }
+
+      .footer_dev .f_family .btn span {
+        font-size: 12px;
+        line-height: 14px;
+      }
+
+      .footer_dev .f_family .btn i {
+        font-size: 12px;
+        transform: translate(300%, 20%);
+      }
+
+      .footer_dev .f_family .family_site_list {
+        overflow: hidden;
+        position: absolute;
+        bottom: 44px;
+        width: 100%;
+      }
+    }
+
+    /*--------------- @media max-width:1440px ---------------*/
+    @media screen and (max-width: 1440px) {
+
+      /* 메인 비주얼 */
+      .visual-sec .txt-box .tit {
+        font-size: 48px;
+        line-height: 56px;
+      }
+
+      /* 차별화된 서비스 */
+      .main_pg_service ol li {
+        flex: 0 1 calc(33.3% - 10px);
+      }
+    }
+
+    /*-------------------- @media 끝 --------------------*/
+  </style>
+</head>
+
+<body data-aos-easing="ease" data-aos-duration="750" data-aos-delay="0">
+  <div class="wrap main_wrap">
+    <!--------------- header --------------->
+    <header id="headerDev" class="header_dev col_white">
+      <div class="inner">
+        <div class="h_wrap">
+          <div class="h_top">
+            <h1 class="logo flex">
+              <a href="#none">
+                <i class="ico">
+                  <span class="sr_only">신한은행 PG</span>
+                </i>
+              </a>
+            </h1>
+            <a href="javascript:void(0);" class="btn_dropdown">전체메뉴</a>
+          </div>
+          <div id="navDev" class="nav_dev" data-lenis-prevent="">
+            <ul class="navbar_dev">
+              <li class="menu_item has_sub">
+                <a href="javascript:void(0);" class="active"><span>서비스 소개</span></a><!-- default : 열림상태 -->
+                <ul class="sub_menu">
+                  <li class="menu_item"><a href="javascript:void(0);">신용카드</a></li>
+                  <li class="menu_item"><a href="javascript:void(0);">가상계좌</a></li>
+                  <li class="menu_item"><a href="javascript:void(0);">계좌이체</a></li>
+                  <li class="menu_item"><a href="javascript:void(0);">정기결제</a></li>
+                  <li class="menu_item"><a href="javascript:void(0);">브랜드페이</a></li>
+                  <li class="menu_item"><a href="javascript:void(0);">에스크로</a></li>
+                  <li class="menu_item"><a href="javascript:void(0);">지급대행</a></li>
+                </ul>
+              </li>
+              <li class="menu_item">
+                <a href="/request/serviceRequest"><span>서비스 신청</span></a>
+              </li>
+              <li class="menu_item has_sub">
+                <a href="javascript:void(0);"><span>고객센터</span></a>
+                <ul class="sub_menu">
+                  <li class="menu_item"><a href="javascript:void(0);">결제내역조회</a></li>
+                  <li class="menu_item"><a href="javascript:void(0);">공지사항</a></li>
+                  <li class="menu_item"><a href="javascript:void(0);">FAQ</a></li>
+                </ul>
+              </li>
+              <li class="menu_item">
+                <a href="javascript:void(0);" class="ico_arw"><span>개발자센터</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!--------------- header --------------->
+    <!--------------- body 구조 --------------->
+    <div class="content-wrapper">
+      <main id="container" class="container">
+        <!--------------- 메인 슬라이드 --------------->
+        <section class="visual-sec">
+          <div class="swiper main-swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="bg bg1"
+                  style="background-image:url(https://pg.shinhan.com/srs/htdocs/images/main/main_visual1.jpg)"></div>
+                <div class="inner txt-box">
+                  <div class="txt_wrap">
+                    <div class="tit">
+                      <strong>결제에 <em>믿음</em>과<br> <em>편리함</em>을 더하다</strong>
+                    </div>
+                    <div class="desc">
+                      <p>신한은행의 이름이 고객의 믿음으로 이어집니다<br> 안정적이고 편리한 비대면 결제 시스템, 신한은행 PG를 만나보세요</p>
+                    </div>
+                  </div>
+                </div>
+                <source srcset="https://pg.shinhan.com/srs/htdocs/images/main/main_visual1.jpg"
+                  media="screen and (min-width: 981px)">
+                <img src="https://pg.shinhan.com/srs/htdocs/images/main/main_visual1.jpg" alt="">
+              </div>
+              <div class="swiper-slide">
+                <div class="bg bg2"
+                  style="background-image:url(https://pg.shinhan.com/srs/htdocs/images/main/main_visual2.jpg)"></div>
+                <div class="inner txt-box">
+                  <div class="txt_wrap">
+                    <div class="tit">
+                      <strong>전자결제에<br><em>금융 노하우</em>를 더하다</strong>
+                    </div>
+                    <div class="desc">
+                      <p>직관적인 관리자 사이트를 통해 가맹점에서 쉽고 편리하게 이용할 수 있습니다.<br>신한은행만의 안정적인 시스템을 기반으로 결제 및 통합정산 서비스를 제공합니다.</p>
+                    </div>
+                  </div>
+                </div>
+                <source srcset="https://pg.shinhan.com/srs/htdocs/images/main/main_visual2.jpg"
+                  media="screen and (min-width: 981px)">
+                <img src="https://pg.shinhan.com/srs/htdocs/images/main/main_visual2.jpg" alt="">
+              </div>
+              <div class="swiper-slide">
+                <div class="bg bg3"
+                  style="background-image:url(https://pg.shinhan.com/srs/htdocs/images/main/main_visual3.jpg)"></div>
+                <div class="inner txt-box">
+                  <div class="txt_wrap">
+                    <div class="tit">
+                      <strong>신한은행이 제공하는<br><em>특별한 결제 경험 </em></strong>
+                    </div>
+                    <div class="desc">
+                      <p>결제 중 고객 이탈 없는 빠르고 편리한 간편결제!<br>보안의 차원이 다릅니다.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="control all-box">
+              <div class="control_wrap">
+                <div class="pager_container">
+                  <div class="swiper-button-prev"></div>
+                  <!-- Add Pagination -->
+                  <div class="swiper-pagination">
+                    <span class="swiper-pagination-bullet"></span>
+                    <span class="swiper-pagination-bullet"></span>
+                    <span class="swiper-pagination-bullet"></span>
+                  </div>
+                  <button type="button" class="swiper-button-pause">정지</button>
+                  <button type="button" class="swiper-button-play">재생</button>
+                  <div class="swiper-button-next"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="scroll_down">
+            <span class="scroll_txt">SCROLL DOWN</span>
+            <span class="scroll_mouse">
+              <span class="scroll_wheel"></span>
+            </span>
+          </div>
+        </section>
+        <!--------------- 신한은행 PG란? --------------->
+        <div class="pin-spacer">
+          <section class="main_service">
+            <ul class="service_bg">
+              <li class="bg1"></li>
+              <li class="bg2"></li>
+              <li class="bg3"></li>
+              <li class="bg4"></li>
+              <li class="bg5"></li>
+              <li class="bg6"></li>
+              <li class="bg7"></li>
+            </ul>
+            <div class="inner">
+              <div class="service_cont">
+                <div class="tit_box">
+                  <h3 class="tit_depth4">Our Sevices</h3>
+                  <h4 class="tit_depth1">신한은행 PG란?</h4>
+                  <p class="desc">
+                    신한은행만의 높은 안정성과 보안성을 기반으로
+                    신용카드나 간편결제등 통합정산 서비스를 제공하는
+                    B2B, B2C 전자지급결제대행 서비스입니다
+                  </p>
+                </div>
+                <ul class="list_box">
+                  <li>
+                    <a href="javascript:void(0);" class="list_category card">
+                      <div class="img_box">
+                        <img src="https://pg.shinhan.com/srs/htdocs/images/main/bg_box_card.jpg" alt="신용카드">
+                      </div>
+                      <div class="inner">
+                        <span class="tit">신용카드</span>
+                        <span class="desc">신용카드 결제 프로세스의 효율성을 극대화하고 보안을 강화하여 편리하고 안전한 결제가 가능하게 하며, 고객에게 편리하고 안전한 결제 옵션을
+                          제공하여 매출 증가와 고객 만족도 향상에 기여합니다.</span>
+                        <div class="more">
+                          <span>자세히 보기</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);" class="list_category virtual">
+                      <div class="img_box">
+                        <img src="https://pg.shinhan.com/srs/htdocs/images/main/bg_box_virtual.jpg" alt="가상계좌">
+                      </div>
+                      <div class="inner">
+                        <div class="icon"></div>
+                        <span class="tit">가상계좌</span>
+                        <span class="desc">가상계좌는 특정 거래나 고객에게 할당된 일회성 또는 반복 사용 계좌로, 고객에게 고유한 가상계좌를 발급하고 결제 과정을 자동화하여 입금
+                          확인
+                          절차 간소화 및 결제 효율성을 높일 수 있습니다.</span>
+                        <div class="more">
+                          <span>자세히 보기</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);" class="list_category transfer">
+                      <div class="img_box">
+                        <img src="https://pg.shinhan.com/srs/htdocs/images/main/bg_box_transfer.jpg" alt="계좌이체">
+                      </div>
+                      <div class="inner">
+                        <div class="icon"></div>
+                        <span class="tit">계좌이체</span>
+                        <span class="desc">번거로운 은행방문이나 인터넷 뱅킹 접속 없이 플랫폼 내에서 은행계좌 간 자동화된 자금 이동 서비스를 제공하여 신속하고 안전한 금융거래 및
+                          자금
+                          관리를 용이하게 합니다.</span>
+                        <div class="more">
+                          <span>자세히 보기</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);" class="list_category payment">
+                      <div class="img_box">
+                        <img src="https://pg.shinhan.com/srs/htdocs/images/main/bg_box_payment.jpg" alt="정기결제">
+                      </div>
+                      <div class="inner">
+                        <div class="icon"></div>
+                        <span class="tit">정기결제</span>
+                        <span class="desc">정기적으로 구독료나 서비스 요금을 청구할 수 있으며, 결제 과정을 간소화하고 자동화하여 고객에게 편리한 결제 서비스를 제공함으로써 안정적
+                          수익
+                          확보 및 고객 만족도를 높일 수 있습니다.</span>
+                        <div class="more">
+                          <span>자세히 보기</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);" class="list_category brand">
+                      <div class="img_box">
+                        <img src="https://pg.shinhan.com/srs/htdocs/images/main/bg_box_brand.jpg" alt="브랜드페이">
+                      </div>
+                      <div class="inner">
+                        <div class="icon"></div>
+                        <span class="tit">브랜드페이</span>
+                        <span class="desc">자사 브랜드의 개성을 강조한 자체 결제 시스템을 구축하여 고객에게 안전하고 편리한 결제 시스템을 지원하는 서비스 입니다. 일관된 브랜드
+                          경험을
+                          제공하여 락인 효과를 극대화할 수 있습니다.</span>
+                        <div class="more">
+                          <span>자세히 보기</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);" class="list_category escrow">
+                      <div class="img_box">
+                        <img src="https://pg.shinhan.com/srs/htdocs/images/main/bg_box_escrow.jpg" alt="에스크로">
+                      </div>
+                      <div class="inner">
+                        <div class="icon"></div>
+                        <span class="tit">에스크로</span>
+                        <span class="desc">고객이 결제한 금액을 신한은행 PG가 보관하고, 거래 조건이 충족되면 해당 금액을 가맹점에게 지급하는 시스템으로 고객에게 안전하고 신뢰할
+                          수
+                          있는 거래 환경을 제공하여 분쟁을 최소할 수 있는 서비스입니다.</span>
+                        <div class="more">
+                          <span>자세히 보기</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);" class="list_category request">
+                      <div class="img_box">
+                        <img src="https://pg.shinhan.com/srs/htdocs/images/main/bg_box_agency.jpg" alt="지급대행">
+                      </div>
+                      <div class="inner">
+                        <div class="icon"></div>
+                        <span class="tit">지급대행</span>
+                        <span class="desc">오픈마켓 사업자를 대신해 신한은행이 판매자에게 정산금을 지급대행하는 서비스 입니다. 거래와 정산 과정을 효율적으로 처리하고, 정확한 지급을
+                          보장하여 신뢰를 구축하는 데 중요한 역할을 합니다.</span>
+                        <div class="more">
+                          <span>자세히 보기</span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!--------------- 차별화된 서비스 --------------->
+        <div class="main_pg_service">
+          <div class="inner">
+            <div class="tit_box aos-init aos-animate" data-aos="fade-up" data-aos-delay="0" data-aos-duration="750">
+              <em>차별화된 서비스</em>
+              <h2>
+                왜
+                <strong>신한은행 PG</strong>여야 할까요?
+              </h2>
+              <span>오랜 시간 축적된 금융 노하우와 경험을 믿으세요 <br>높은 안정성과 보안성을 기반으로 사업 모델에 최적화된 결제 서비스를 제공합니다</span>
+            </div>
+            <ol>
+              <li class="aos-init" data-aos="fade-up" data-aos-delay="100" data-aos-duration="750">
+                <div>
+                  <img src="https://pg.shinhan.com/srs/htdocs/images/main/img_service1.png" alt="결제수수료 절감">
+                  <strong>결제수수료 절감</strong>
+                  <span>
+                    경쟁력 있는 결제 수수료와
+                    맞춤형 요금제, 투명한 수수료 구조를
+                    제공하여 <em>거래 비용을 절감</em>하고
+                    <em>고객의 비용 부담을 최소화</em>합니다.
+                  </span>
+                </div>
+              </li>
+              <li class="aos-init" data-aos="fade-up" data-aos-delay="200" data-aos-duration="750">
+                <div>
+                  <img src="https://pg.shinhan.com/srs/htdocs/images/main/img_service2.png" alt="자금관리 안전성">
+                  <strong>자금관리 안전성</strong>
+                  <span>
+                    강력한 보안 시스템과 실시간 모니터링을
+                    통해 <em>자금 관리의 안정성을 보장</em>하며,
+                    체계적인 리스크 관리와 데이터 보호로
+                    <em>고객의 자산을 안전하게 관리</em>합니다.
+                  </span>
+                </div>
+              </li>
+              <li class="aos-init" data-aos="fade-up" data-aos-delay="300" data-aos-duration="750">
+                <div>
+                  <img src="https://pg.shinhan.com/srs/htdocs/images/main/img_service3.png" alt="서비스 신뢰도">
+                  <strong>서비스 신뢰도</strong>
+                  <span>
+                    검증된 시스템과 오랜 경험을 바탕으로
+                    <em>높은 서비스 신뢰도를 제공</em>하며,
+                    안정적인 기술 지원과 체계적인 고객 관리로
+                    <em>신뢰할 수 있는 결제 환경</em>을 보장합니다.
+                  </span>
+                </div>
+              </li>
+              <li class="aos-init" data-aos="fade-up" data-aos-delay="400" data-aos-duration="750">
+                <div>
+                  <img src="https://pg.shinhan.com/srs/htdocs/images/main/img_service4.png" alt="정산주기 단축">
+                  <strong>정산주기 단축</strong>
+                  <span>
+                    정산 주기를 단축하여 <em>빠른 자금 입금을
+                      지원</em>하며, 이를 통해 기업의 자금 흐름을
+                    원활하게 하고 <em>운영 자금을 효율적으로
+                      관리</em>할 수 있습니다.
+                  </span>
+                </div>
+              </li>
+              <li class="aos-init" data-aos="fade-up" data-aos-delay="500" data-aos-duration="750">
+                <div>
+                  <img src="https://pg.shinhan.com/srs/htdocs/images/main/img_service5.png" alt="맞춤형 통합결제">
+                  <strong>맞춤형 통합결제</strong>
+                  <span>
+                    고객의 비즈니스 요구에 맞춘 <em>맞춤형
+                      통합결제 솔루션을 제공</em>하며, 다양한
+                    결제 옵션과 유연한 통합 기능으로
+                    <em>최적의 결제 환경을 구축</em>합니다.
+                  </span>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <!--------------- Our Partner --------------->
+        <section class="main_partner">
+          <div class="inner">
+            <div class="tit_box aos-init aos-animate" data-aos="fade-up" data-aos-delay="0" data-aos-duration="750">
+              <em>Our Partner</em>
+              <h2>
+                배달앱
+                <span></span>
+                도 이용하는 신한은행 PG
+              </h2>
+            </div>
+            <div class="con_box aos-init aos-animate" data-aos="fade-up" data-aos-delay="50" data-aos-duration="750">
+              <p class="txt aos-init aos-animate" data-aos="fade-up" data-aos-delay="100" data-aos-duration="750">
+                소상공인의 부담을 덜어드리는
+                <br>
+                공공배달 앱 땡겨요도 신한은행 PG와 함께합니다
+              </p>
+              <ul class="flex">
+                <li class="aos-init aos-animate" data-aos="fade-up" data-aos-delay="200" data-aos-duration="750">
+                  <p><img src="https://pg.shinhan.com/srs/htdocs/images/main/ico_parther1.png" alt=""></p>
+                  <strong>낮은 주문 중개수수료</strong>
+                  <span>신한은행 PG의 낮은 수수료로 땡겨요는 광고비 없이 2% 수수료가 가능합니다.</span>
+                </li>
+                <li class="aos-init aos-animate" data-aos="fade-up" data-aos-delay="300" data-aos-duration="750">
+                  <p><img src="https://pg.shinhan.com/srs/htdocs/images/main/ico_parther2.png" alt=""></p>
+                  <strong>빠른 정산주기</strong>
+                  <span>신한은행 PG의 빠른 정산으로 계좌이체는 당일 입금, 카드결제도 다음날에 정산됩니다.</span>
+                </li>
+                <li class="aos-init aos-animate" data-aos="fade-up" data-aos-delay="400" data-aos-duration="750">
+                  <p><img src="https://pg.shinhan.com/srs/htdocs/images/main/ico_parther3.png" alt=""></p>
+                  <strong>카드/계좌 복합결제</strong>
+                  <span>다양한 결제 수단 사용과 복합결제가 가능하여 원하는 방식으로 결제 할 수 있습니다.</span>
+                </li>
+              </ul>
+            </div>
+            <p class="img_delivery aos-init aos-animate" data-aos="fade-left" data-aos-delay="100"
+              data-aos-duration="750">
+              <img src="https://pg.shinhan.com/srs/htdocs/images/main/img_delivery.png" alt="">
+            </p>
+          </div>
+          <div class="partners_logo">
+            <p>그 외 다양한 이용사례로<br> 안정성을 검증받았습니다.</p>
+            <div class="logo_box marquee2">
+              <div
+                style="width: 100000px; margin-left: -3200px; animation: 32.1787s linear 0s infinite normal none running marqueeAnimation-8053408;"
+                class="js-marquee-wrapper">
+                <div class="js-marquee" style="margin-right: 0px; float: left;">
+                  <ul>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther1.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther2.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther3.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther4.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther5.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther7.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther6.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther1.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther2.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther3.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther4.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther5.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther7.png" alt=""></li>
+                    <li><img src="https://pg.shinhan.com/srs/htdocs/images/main/logo_parther6.png" alt=""></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!--------------- main_apply_guide --------------->
+        <section class="main_apply_guide">
+          <div class="apply_bg"></div>
+          <a href="#none" class="apply_con_wrap">
+            <div class="inner">
+              <div class="top_wrap">
+                <h2 class="tit">신한은행 PG의 안정적인<br> 결제 서비스 신청안내</h2>
+                <p class="desc">신청 방법 알아보기</p>
+              </div>
+            </div>
+          </a>
+        </section>
+        <!--------------- main_faq --------------->
+        <section class="main_faq">
+          <div class="inner">
+            <div class="top_area">
+              <div class="tit_wrap">
+                <h2 class="tit_depth4">자주 묻는 질문</h2>
+                <h3 class="tit_depth2">궁금한 점이 <br> 더 있으신가요?</h3>
+              </div>
+              <a href="javascript:void(0);" class="btn_more">더보기</a>
+            </div>
+            <div class="bottom_area">
+              <ul class="faq_list">
+                <li>
+                  <div class="acc_head">
+                    <!-- [D] 활성화 : 클래스 on 추가 -->
+                    <button type="button" class="btn_que">
+                      <span>결제내역문의</span>
+                      <i class="ico_q"></i>
+                      신한은행에서 물건을 구매한 적이 없어요. 결제된 내역이 무엇인지 알고 싶습니다.
+                      <i class="ico_down" title="열기"></i>
+                    </button>
+                  </div>
+                  <div class="acc_body">
+                    <div class="editor">신한은행은 전자결제 서비스 제공 업체로서 당행의 결제 시스템을 사용하는 상점에서 결제를 하셨을 경우 결제 내역에 '신한은행' or
+                      '신한은행PG'
+                      라고 표기가 됩니다. <br>신한은행PG홈페이지 혹은 E-Mail로 아래 정보를 확인하여 요청 주시면 사용처를 확인하여 회신드리겠습니다.<br><br>E-Mail :
+                      task_pg@shinhan.com<br><br>[신용카드] 카드번호와 승인번호(8자리/ 승인 번호는 카드사 홈페이지 및 카드사 고객센터를 통해 확인 가능), 결제일자,
+                      결제금액<br>[계좌이체] 예금주의 생년월일(사업자 통장으로 계좌이체 시 사업자 번호), 이용된 통장의 계좌번호 뒤 5자리, 결제일자, 결제금액<br>[무통장입금(가상계좌)]
+                      입금하신 가상계좌번호, 결제일자, 결제금액</div>
+                  </div>
+                </li>
+                <li>
+                  <div class="acc_head">
+                    <!-- [D] 활성화 : 클래스 on 추가 -->
+                    <button type="button" class="btn_que">
+                      <span>결제내역문의</span>
+                      <i class="ico_q"></i>
+                      구매하지 않았는데 매달 자동으로 결제가 되고 있습니다.
+                      <i class="ico_down" title="열기"></i>
+                    </button>
+                  </div>
+                  <div class="acc_body">
+                    <div class="editor">상점에 자동결제를 신청해 놓으신 경우 정기결제에 대한 승인 내역일 수 있습니다. <br>신용카드 결제정보를 확인하시어 아래 메일로 문의주시면
+                      결제내역 확인하여 회신드리겠습니다.<br><br>E-Mail : task_pg@shinhan.com<br>[신용카드] 카드번호와 승인번호(8자리/ 승인 번호는 카드사 홈페이지
+                      및
+                      카드사 고객센터를 통해 확인 가능), 결제일자, 결제금액</div>
+                  </div>
+                </li>
+                <li>
+                  <div class="acc_head">
+                    <!-- [D] 활성화 : 클래스 on 추가 -->
+                    <button type="button" class="btn_que">
+                      <span>결제내역문의</span>
+                      <i class="ico_q"></i>
+                      결제된 건을 취소하고 싶습니다.
+                      <i class="ico_down" title="열기"></i>
+                    </button>
+                  </div>
+                  <div class="acc_body">
+                    <div class="editor">신한은행 PG는 온라인 상점에 결제시스템을 제공하는 결제대행사로, 고객님께서 사용하신 사이트의 결제서비스만을 제공합니다. <br>결제 취소는
+                      결제하신 상점에서만 진행 가능하므로, 결제하신 사이트 측으로 취소 관련 문의 부탁드립니다.</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <!--------------- body 구조 --------------->
+    <!------------- footer --------------->
+    <footer id="footerDev" class="footer_dev">
+      <div class="inner flex">
+        <div class="f_cont">
+          <div class="f_top flex">
+            <div class="f_logo">
+              <span class="sr_only"></span>
+            </div>
+            <div class="f_link">
+              <ul class="flex">
+                <li><a href="javascript:void(0);">전자금융거래 이용약관</a></li>
+                <li class="txt_bold"><a href="javascript:void(0);">개인정보 처리방침</a></li>
+                <li><a href="javascript:void(0);">에스크로 서비스 이용약관</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="f_info">
+            <ul class="flex">
+              <li>
+                <i class="fa-solid fa-envelope"></i>
+                <a href="javascript:void(0);">task_pg@shinhan.com</a>
+              </li>
+            </ul>
+          </div>
+          <p class="copyright">© SHINHAN BANK. All reserved.</p>
+        </div>
+        <div class="f_family">
+          <button type="button" class="btn" onclick="toggleFamilyList();">
+            <span>Family Site</span>
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <div class="family_site_list" style="height: 0px;">
+            <ul>
+              <li>
+                <a href="javascript:void(0);">PG 개발자센터</a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">신한은행 BasS</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!------------- footer --------------->
+  </div>
+  <script>
+    // AOS animate
+    AOS.init();
+
+    // lenis smooth scroll
+    const lenis = new Lenis({
+      // 추가된 부분
+      duration: 2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+
+    // 슬라이드 시작
+    var swiper = new Swiper('.main-swiper', {
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      },
+      loop: true,
+      effect: 'fade',
+      watchSlidesProgress: true
+    });
+
+    document.addEventListener(
+      "mouseleave",
+      (event) => {
+        const el = event.target;
+        if (el && el.matches && el.matches(".main-swiper")) {
+          const activeNavItem = el.querySelector(
+            ".swiper-pagination-bullet-active"
+          );
+
+          if (activeNavItem) {
+            activeNavItem.classList.remove("swiper-pagination-bullet-active"); // 기존 활성화 상태 제거.
+
+            setTimeout(() => {
+              activeNavItem.classList.add("swiper-pagination-bullet-active"); // 약간의 지연 후 다시 활성화.
+            }, 50);
+          }
+        }
+      },
+      true
+    );
+
+    // 자동재생 정지 버튼
+    const toggleSwiperAutoplay = (action) => {
+      const swiperContainer = document.querySelector(".main-swiper");
+      if (swiperContainer && swiperContainer.swiper) {
+        if (action === "pause") {
+          swiperContainer.swiper.autoplay.stop();
+          swiperContainer.classList.add("swiper-paused");
+        } else {
+          swiperContainer.swiper.autoplay.start();
+          swiperContainer.classList.remove("swiper-paused");
+        }
+
+        document.querySelector(".swiper-button-pause").style.display =
+          action === "pause" ? "none" : "block";
+        document.querySelector(".swiper-button-play").style.display =
+          action === "pause" ? "block" : "none";
+      }
+    };
+
+    document.querySelector(".swiper-button-pause").addEventListener("click", () => toggleSwiperAutoplay("pause"));
+    document.querySelector(".swiper-button-play").addEventListener("click", () => toggleSwiperAutoplay("play"));
+
+    // 신한PG소개
+    // 스크롤트리거
+    gsap.registerPlugin(ScrollTrigger);
+
+    let option = {
+      trigger: '.main_service',
+      scrub: 1,
+      start: 'top top',
+      end: 'bottom bottom',
+      endTrigger: ".list_box",
+      pin: true,
+      pinSpacing: true,
+      onUpdate: self => {
+        const main_service = $('.main_service');
+        const classes = ['active01', 'active02', 'active03', 'active04', 'active05', 'active06', 'active07'];
+
+        main_service.removeClass(classes.join(' '));
+
+        const progressRanges = [0, 0.14, 0.28, 0.42, 0.64, 0.80, 0.90, 1];
+        for (let i = 0; i < progressRanges.length - 1; i++) {
+          if (self.progress > progressRanges[i] && self.progress <= progressRanges[i + 1]) {
+            main_service.addClass(classes[i]);
+            break;
+          }
+        }
+      },
+      onLeave: () => {
+        // 페이지 벗어나면 클래스 삭제
+        let main_service = $('.main_service');
+        main_service.removeClass('active01 active02 active03 active04 active05 active06');
+      },
+    };
+
+    let wh = $(window).height();
+    let timelineTo1 = gsap.to('.list_box', {
+      y: function () {
+        return -(2700 - wh) + 'px';
+      },
+      duration: 1,
+      ease: 'none'
+    });
+
+    let tl = gsap.timeline({
+      scrollTrigger: option
+    });
+
+    tl.add(timelineTo1);
+
+    // 모바일 환경에서 스크롤 트리거 제거
+    let ww = window.innerWidth;
+    if (ww < 1024) {
+      tl.scrollTrigger.kill();
+      tl.kill();
+    }
+
+    $(window).on('resize', function () {
+      ww = window.innerWidth;
+      if (ww < 1024) {
+        if (tl.scrollTrigger) {
+          tl.scrollTrigger.kill();
+        }
+      }
+      if (ww > 1023) {
+        if (tl.scrollTrigger == null) {
+          wh = $(window).height();
+          tl = gsap.timeline({
+            scrollTrigger: option
+          });
+          tl.add(timelineTo1);
+        }
+      }
+    });
+
+
+    // main_partner
+    // marquee
+    let marquee = $(".partners_logo .marquee2 .js-marquee").marquee({
+      duration: 60000,
+      delayBeforeStart: -50000,
+      direction: "right",
+      startVisible: true,
+      duplicated: true,
+      gap: 0
+    });
+
+
+    // main_faq_guide
+    if ($(".faq_list").length > 0) {
+      $(".faq_list").on("click", ".btn_que", function () {
+        const $this = $(this);
+        const $accHead = $this.closest(".acc_head");
+        const $accBody = $accHead.next(".acc_body");
+
+        $(".faq_list .acc_body").not($accBody).slideUp();
+        $(".faq_list .acc_head").not($accHead).removeClass("on");
+
+        $accBody.slideToggle();
+        $accHead.toggleClass("on");
+      });
+    }
+
+    // footer toggle
+    function toggleFamilyList() {
+      const familyList = document.querySelector(".family_site_list");
+      const isActive = familyList.classList.toggle("active");
+
+      familyList.style.transition = "height 0.3s ease-out";
+      familyList.style.height = isActive ? `${familyList.scrollHeight}px` : "0px";
+    }
+
+    // 헤더 테스트
+    //header
+    var $header = $(".header");
+    var $dropdown = $(".header .btn_dropdown");
+    var $navbar = $(".header .navbar");
+    let hadOnClass = $header.hasClass("on");
+
+    function headerMainResize() {
+      if ($(window).width() >= 1024) {
+        $header.removeClass("on");
+        $dropdown.removeClass("active");
+        $navbar.removeClass("active");
+        $("body").removeClass("header_activated");
+      }
+    }
+
+    function setEventHandlers() {
+      var isMobile = $(window).outerWidth() < 1024;
+
+      $(".header .btn_dropdown").off("click");
+      $(".header .navbar>li>a").off("click");
+      $(".header .navbar>li.has_sub").off("mouseenter mouseleave focusin");
+      $(".header .navbar>li.has_sub>a").off("mouseenter");
+
+      if (isMobile) {
+        // 모바일 이벤트
+        $(".header .btn_dropdown").on("click", function (e) {
+          e.preventDefault();
+
+          var $this = $(this);
+          var $navbar = $(".header .navbar");
+          $this.toggleClass("active");
+          $navbar.toggleClass("active");
+          $(".header").toggleClass("on");
+          $("body").toggleClass("header_activated");
+        });
+
+        $(".header .navbar>li>a").on("click", function () {
+          var $this = $(this);
+          var $li = $this.closest(".menu_item");
+          var $subMenu = $li.find(".sub_menu");
+
+          if ($li.hasClass("active")) {
+            $subMenu.slideUp();
+            $li.removeClass("active");
+          } else {
+            $subMenu.slideDown();
+            $li.addClass("active");
+          }
+        });
+
+        //스크롤 이벤트
+        var lastScrollTop = 0;
+        $(window).scroll(function () {
+          var scrollTop = $(this).scrollTop();
+
+          if (scrollTop < 0) {
+            return;
+          }
+
+          if (scrollTop > lastScrollTop) {
+            $(".wrap").addClass("down");
+          } else {
+            $(".wrap").removeClass("down");
+          }
+          lastScrollTop = scrollTop;
+        });
+      } else {
+        // PC 이벤트
+        $(".header .navbar>li.has_sub").on("mouseenter focusin", function () {
+          $(this).addClass("pc_active");
+          $(this).parents(".header").addClass("pc_on");
+        });
+
+        $(".header .navbar>li.has_sub").on("mouseleave", function () {
+          $(this).parents(".header").removeClass("pc_on");
+          $(this).closest(".has_sub").removeClass("pc_active");
+        });
+      }
+
+      $(".header .navbar>li .sub_menu").hide();
+      $(".header .navbar>li.active .sub_menu").show();
+    }
+
+    headerMainResize();
+    setEventHandlers();
+
+    $(window).on("resize", function () {
+      headerMainResize();
+      setEventHandlers();
+    });
+
+    // header 모바일 사이드 메뉴
+    const headerDev = document.querySelector('.header_dev');
+    if (headerDev) {
+      const dropdownBtn = document.querySelector('.btn_dropdown');
+      const wrap = document.querySelector('.wrap');
+      let isDropdownClicked = false;
+
+      dropdownBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        headerDev.classList.toggle('active');
+        document.body.classList.toggle('header_activated');
+        isDropdownClicked = true;
+
+        setTimeout(() => {
+          isDropdownClicked = false;
+        }, 1000);
+      });
+
+      // header - 모바일 사이드 아코디언 메뉴
+      const btn = document.querySelectorAll('.navbar_dev>.menu_item>a');
+
+      btn.forEach(el => {
+        el.addEventListener('click', function () {
+          let tarGet = this.nextElementSibling;
+          tarGet.style.height = 'auto';
+          let _He = tarGet.clientHeight;
+          tarGet.style.height = '0';
+
+          if (el.classList.contains('active')) {
+            tarGet.style.height = _He + 'px';
+            setTimeout(function () {
+              tarGet.style.height = '0';
+            }, 0);
+          } else {
+            setTimeout(function () {
+              tarGet.style.height = _He + 'px';
+            }, 0);
+          }
+
+          btn.forEach(sEl => {
+            if (sEl !== el) {
+              if (sEl.classList.contains('active')) {
+                sEl.click();
+              }
+            }
+          });
+
+          el.classList.toggle("active");
+        })
+      });
+
+      // 스크롤 이벤트
+      // 헤더 높이 조절
+      let lastScrollTop = 0;
+      let isScrollingUp = false;
+
+      window.addEventListener('scroll', function () {
+        requestAnimationFrame(function () {
+          if (isDropdownClicked) return;
+
+          var scrollPosition = window.scrollY;
+          var windowWidth = window.innerWidth;
+
+          if (scrollPosition < lastScrollTop) {
+            isScrollingUp = true;
+          } else {
+            isScrollingUp = false;
+          }
+
+          // mobile 화면일때
+          if (scrollPosition < 0) {
+            return;
+          }
+
+          if (windowWidth <= 1024 && !isScrollingUp) {
+            wrap.classList.add('down');
+          } else {
+            wrap.classList.remove('down');
+          }
+
+          // pc 화면일때
+          if (scrollPosition === 0) {
+            wrap.classList.remove('pc_down');
+          } else {
+            wrap.classList.add('pc_down');
+          }
+
+          lastScrollTop = scrollPosition;
+        });
+      });
+    }
+
+    // 새로고침 시 스크롤 최상단 이동
+    $(function () {
+      $("html, body").animate({ scrollTop: 0 }, "fast");
+    });
+
+
+    // 이미지 로드 확인 (예비)
+    const images = document.querySelectorAll("img");
+    let loadedImagesCount = 0;
+    images.forEach((img) => {
+      if (img.complete) {
+        // 이미지 로드 완료 시
+        loadedImagesCount++;
+      } else {
+        // 이미지 로드 완료 아닐 시
+        img.addEventListener("load", () => {
+          loadedImagesCount++;
+          if (loadedImagesCount === images.length) {
+            allImagesLoaded();
+          }
+        });
+      }
+    });
+    // 모든 이미지 로드 여부 확인
+    if (loadedImagesCount === images.length) {
+      allImagesLoaded();
+    }
+    function allImagesLoaded() {
+      // 이미지 로드 완료 시 lenis smooth scroll 실행
+      resetLenis();
+    }
+    setTimeout(() => {
+      resetLenis();
+    }, 1000);
+  </script>
+</body>
+
+</html>
